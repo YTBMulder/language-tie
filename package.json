@@ -1,7 +1,7 @@
 {
     "version": "0.0.1",
     "name": "language-tie",
-    "description": "Atom language support for C/C++",
+    "description": "Atom language support for TIE",
     "engines": {
         "atom": "*",
         "node": "*"
