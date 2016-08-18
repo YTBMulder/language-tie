@@ -1,7 +1,14 @@
 {
-    "version": "0.0.1",
+    "version": "0.2.0",
     "name": "language-tie",
     "description": "Atom language support for TIE",
+    "repository": {
+    	"type":  "git",
+    	"url": "https://github.com/YTBMulder/language-tie.git"
+    },
+    "bugs": {
+		"url": "https://github.com/YTBMulder/language-tie/issues"
+	},
     "engines": {
         "atom": "*",
         "node": "*"

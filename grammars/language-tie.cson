@@ -7,8 +7,11 @@ patterns: [
         include: '#comments'
     }
     {
+        include: '#c_function_call'
+    }
+    {
         comment: 'Highlighting storage types'
-        match: '\\b(assign|immediate_range|in|inout|function|operation|out|regfile|semantic|state|table|wire)\\b'
+        match: '\\b(assign|ctype|immediate_range|in|inout|function|operation|out|proto|regfile|semantic|state|table|wire)\\b'
         name: 'storage.type.tie'
     }
     {
@@ -82,3 +85,13 @@ repository:
                         name: 'constant.character.escape.line-continuation.tie'
             }
         ]
+    c_function_call:
+        captures:
+            1:
+                name: 'punctuation.whitespace.function-call.leading.tie'
+            2:
+                name: 'support.function.any-method.tie'
+            4:
+                name: 'punctuation.definition.parameters.tie'
+        match: '(?x) (?: (?= \\s )  (?:(?<=else|new|return) | (?<!\\w)) (\\s+))?\n\t\t\t(\\b \n\t\t\t\t(?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()(?:(?!NS)[A-Za-z_][A-Za-z0-9_]*+\\b | :: )++                  # actual name\n\t\t\t)\n\t\t\t \\s*(\\()'
+        name: 'meta.function-call.tie'
