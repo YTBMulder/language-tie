@@ -1,5 +1,5 @@
 # language-tie
-TIE grammar package for Atom based off the [language-c package](https://github.com/atom/language-c).
+TIE grammar (for the RG-2016.3 release) package for Atom based off the [language-c package](https://github.com/atom/language-c).
 
 Contributions made by [DamnedScholar](https://github.com/DamnedScholar).
 
@@ -11,3 +11,4 @@ TODO's:
 - Clean up the number highlighting
 - Add highlighting for definitions such as `32'b0`
 - Automatic indentation for `{}` when using defining an `operation`
+- Add more keywords
