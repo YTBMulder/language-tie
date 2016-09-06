@@ -10,14 +10,25 @@ patterns: [
         include: '#c_function_call'
     }
     {
-        comment: 'Highlighting storage types'
-        match: '\\b(assign|ctype|immediate_range|in|inout|format|function|operation|operator|out|proto|regfile|schedule|semantic|slot_opcodes|state|table|wire)\\b'
+        comment: 'Highlighting of storage types'
+        match: '\\b(assign|const|ctype|immediate_range|in|inout|format|function|operation|operator|out|proto|regfile|schedule|semantic|slot_opcodes|state|table|wire)\\b'
         name: 'storage.type.tie'
     }
     {
-        comment: 'Highlighting numeric types'
+        comment: 'Highlighting of numeric types'
         match: "\\b((0(x|X)[0-9a-fA-F]*)|(([1-9]\\d*)'(b|h)(0|1))|(0(b|B)[01]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
         name: 'constant.numeric.tie'
+    }
+    {
+        comment: 'Highlighting of embedded PERL code'
+        begin: '^;'
+        end: '$'
+        name: 'meta.embedded.perl'
+        patterns: [
+            {
+                include: 'source.perl'
+            }
+        ]
     }
     {
         comment: 'Highlighting #include or #import'
