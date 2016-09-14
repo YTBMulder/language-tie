@@ -10,13 +10,16 @@ patterns: [
         include: '#c_function_call'
     }
     {
+        include: '#strings'
+    }
+    {
         comment: 'Highlighting of storage types'
-        match: '\\b(assign|const|ctype|immediate_range|in|inout|format|function|operation|operator|out|proto|regfile|schedule|semantic|slot_opcodes|state|table|wire)\\b'
+        match: '\\b(assign|coprocessor|cstub_swap|ctype|field|length|lookup|iclass|imap|immediate_range|import_wire|in|inout|instruction_group|interface|format|function|opcode|operand|operand_map|operation|operator|out|property|proto|queue|reference|regbypass|regfile|regport|schedule|semantic|slot|slot_opcodes|state|table|TIEprint|user_register|wire|xfer_proto)\\b'
         name: 'storage.type.tie'
     }
     {
         comment: 'Highlighting of numeric types'
-        match: "\\b((0(x|X)[0-9a-fA-F]*)|(([1-9]\\d*)'(b|h)(0|1))|(0(b|B)[01]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
+        match: "\\b((([1-9]*)'b(0|1)*)|(([1-9]*)'d[0-9]*)|(([1-9]\\d*)'h[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
         name: 'constant.numeric.tie'
     }
     {
@@ -35,11 +38,11 @@ patterns: [
         begin: '^\\s*((#)\\s*(include|import))\\b\\s*'
         beginCaptures:
             1:
-                name: 'keyword.control.directive.$3.c'
+                name: 'keyword.control.directive.$3.tie'
             2:
-                name: 'punctuation.definition.directive.c'
+                name: 'punctuation.definition.directive.tie'
         end: '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
-        name: 'meta.preprocessor.include.c'
+        name: 'meta.preprocessor.include.tie'
         patterns: [
             {
                 include: '#line_continuation_character'
@@ -48,23 +51,23 @@ patterns: [
                 begin: '"'
                 beginCaptures:
                     0:
-                        name: 'punctuation.definition.string.begin.c'
+                        name: 'punctuation.definition.string.begin.tie'
                 end: '"'
                 endCaptures:
                     0:
-                        name: 'punctuation.definition.string.end.c'
-                name: 'string.quoted.double.include.c'
+                        name: 'punctuation.definition.string.end.tie'
+                name: 'string.quoted.double.include.tie'
             }
             {
                 begin: '<'
                 beginCaptures:
                     0:
-                        name: 'punctuation.definition.string.begin.c'
+                        name: 'punctuation.definition.string.begin.tie'
                 end: '>'
                 endCaptures:
                     0:
-                        name: 'punctuation.definition.string.end.c'
-                name: 'string.quoted.other.lt-gt.include.c'
+                        name: 'punctuation.definition.string.end.tie'
+                name: 'string.quoted.other.lt-gt.include.tie'
             }
         ]
     }
@@ -144,3 +147,69 @@ repository:
                 name: 'punctuation.definition.parameters.tie'
         match: '(?x) (?: (?= \\s )  (?:(?<=else|new|return) | (?<!\\w)) (\\s+))?\n\t\t\t(\\b \n\t\t\t\t(?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()(?:(?!NS)[A-Za-z_][A-Za-z0-9_]*+\\b | :: )++                  # actual name\n\t\t\t)\n\t\t\t \\s*(\\()'
         name: 'meta.function-call.tie'
+    strings:
+        patterns: [
+            {
+                begin: '"'
+                beginCaptures:
+                    0:
+                        name: 'punctuation.definition.string.begin.tie'
+                end: '"'
+                endCaptures:
+                    0:
+                        name: 'punctuation.definition.string.end.tie'
+                name: 'string.quoted.double.tie'
+                patterns: [
+                    {
+                        include: '#string_escaped_char'
+                    }
+                    {
+                        include: '#string_placeholder'
+                    }
+                    {
+                        include: '#line_continuation_character'
+                    }
+                ]
+            }
+            {
+                begin: '\''
+                beginCaptures:
+                    0:
+                        name: 'punctuation.definition.string.begin.tie'
+                end: '\''
+                endCaptures:
+                    0:
+                        name: 'punctuation.definition.string.end.tie'
+                name: 'string.quoted.single.tie'
+                patterns: [
+                    {
+                        include: '#string_escaped_char'
+                    }
+                    {
+                        include: '#line_continuation_character'
+                    }
+                ]
+            }
+        ]
+    string_escaped_char:
+        patterns: [
+            {
+                match: '\\\\(\\\\|[abefnprtv\'"?]|[0-3]\\d{,2}|[4-7]\\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})'
+                name: 'constant.character.escape.tie'
+            }
+            {
+                match: '\\\\.'
+                name: 'invalid.illegal.unknown-escape.tie'
+            }
+        ]
+    string_placeholder:
+        patterns: [
+            {
+                match: '(?x)%\n    \t\t\t\t\t\t(\\d+\\$)?                             # field (argument #)\n    \t\t\t\t\t\t[#0\\- +\']*                           # flags\n    \t\t\t\t\t\t[,;:_]?                              # separator character (AltiVec)\n    \t\t\t\t\t\t((-?\\d+)|\\*(-?\\d+\\$)?)?              # minimum field width\n    \t\t\t\t\t\t(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?         # precision\n    \t\t\t\t\t\t(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n    \t\t\t\t\t\t[diouxXDOUeEfFgGaACcSspn%]           # conversion type\n    \t\t\t\t\t'
+                name: 'constant.other.placeholder.tie'
+            }
+            {
+                match: '%'
+                name: 'invalid.illegal.placeholder.tie'
+            }
+        ]
