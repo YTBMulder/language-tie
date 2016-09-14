@@ -10,10 +10,10 @@ Version history:
 0.1.0 - Initial commit with highlight definitions for datatypes and numbers.  
 0.2.0 - Improved datatype and added comment and function highlighting.  
 0.3.0 - Added support for highlighting #include, #import and extended the numeric and storage types.  
-0.4.0 - Added support for highlighting embedded PERL code and extended the storage types.
+0.4.0 - Added support for highlighting embedded PERL code and extended the storage types.  
+0.5.0 - Added string highlighting and all control keywords based on the documentation of the RG-2016.3 release. Updated highlighting of numeric types for binary, decimal and hexadecimal.
 
 TODO's:
 - Clean up the code
 - Automatic indentation for `{}` when using defining an `operation`
-- Add more keywords
 - Automatically update the styles.less file with a background color for embedded PERL code
