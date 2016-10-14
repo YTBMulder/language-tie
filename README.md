@@ -13,9 +13,9 @@ Version history:
 0.4.0 - Added support for highlighting embedded PERL code and extended the storage types.  
 0.5.0 - Added string highlighting and all control keywords based on the documentation of the RG-2016.3 release. Updated highlighting of numeric types for binary, decimal and hexadecimal.  
 0.6.0 - Added support for highlighting def, shared and use. Made two numeric types case-insensitive and removed #include and #import highlighting since it is not present in TIE.  
-0.7.0 - Added support for highlighting octal numbers.
+0.7.0 - Added support for highlighting octal numbers.  
+0.8.0 - Added automatic indentation for curly brackets.
 
 TODO's:
 - Clean up the code
-- Automatic indentation for `{}` when using defining an `operation`
 - Automatically update the styles.less file with a background color for embedded PERL code
