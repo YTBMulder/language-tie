@@ -14,12 +14,12 @@ patterns: [
     }
     {
         comment: 'Highlighting of storage types'
-        match: '\\b(assign|coprocessor|cstub_swap|ctype|field|length|lookup|iclass|imap|immediate_range|import_wire|in|inout|instruction_group|interface|format|function|opcode|operand|operand_map|operation|operator|out|property|proto|queue|reference|regbypass|regfile|regport|schedule|semantic|slot|slot_opcodes|state|table|TIEprint|user_register|wire|xfer_proto)\\b'
+        match: '\\b(assign|coprocessor|cstub_swap|ctype|def|field|length|lookup|iclass|imap|immediate_range|import_wire|in|inout|instruction_group|interface|format|function|opcode|operand|operand_map|operation|operator|out|property|proto|queue|reference|regbypass|regfile|regport|schedule|semantic|shared|slot|slot_opcodes|state|table|TIEprint|use|user_register|wire|xfer_proto)\\b'
         name: 'storage.type.tie'
     }
     {
         comment: 'Highlighting of numeric types'
-        match: "\\b((([1-9]*)'b(0|1)*)|(([1-9]*)'d[0-9]*)|(([1-9]\\d*)'h[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
+        match: "\\b((([1-9]*)'b(0|1)*)|(([1-9]*)'d[0-9]*)|(?i)(([1-9]\\d*)'h[0-9a-f]*)|(([1-9]*)'o[0-7]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(?i)(l|ul|u|f|ll|ull)?\\b"
         name: 'constant.numeric.tie'
     }
     {
@@ -30,44 +30,6 @@ patterns: [
         patterns: [
             {
                 include: 'source.perl'
-            }
-        ]
-    }
-    {
-        comment: 'Highlighting #include or #import'
-        begin: '^\\s*((#)\\s*(include|import))\\b\\s*'
-        beginCaptures:
-            1:
-                name: 'keyword.control.directive.$3.tie'
-            2:
-                name: 'punctuation.definition.directive.tie'
-        end: '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
-        name: 'meta.preprocessor.include.tie'
-        patterns: [
-            {
-                include: '#line_continuation_character'
-            }
-            {
-                begin: '"'
-                beginCaptures:
-                    0:
-                        name: 'punctuation.definition.string.begin.tie'
-                end: '"'
-                endCaptures:
-                    0:
-                        name: 'punctuation.definition.string.end.tie'
-                name: 'string.quoted.double.include.tie'
-            }
-            {
-                begin: '<'
-                beginCaptures:
-                    0:
-                        name: 'punctuation.definition.string.begin.tie'
-                end: '>'
-                endCaptures:
-                    0:
-                        name: 'punctuation.definition.string.end.tie'
-                name: 'string.quoted.other.lt-gt.include.tie'
             }
         ]
     }
