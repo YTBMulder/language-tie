@@ -15,6 +15,7 @@ Version history:
 0.6.0 - Added support for highlighting def, shared and use. Made two numeric types case-insensitive and removed #include and #import highlighting since it is not present in TIE.  
 0.7.0 - Added support for highlighting octal numbers.  
 0.8.0 - Added automatic indentation for curly brackets.
+1.0.0 - First release of the package. Also available for download from within Atom.
 
 TODO's:
 - Clean up the code
