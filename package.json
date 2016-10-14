@@ -1,16 +1,17 @@
 {
-    "version": "0.8.0",
     "name": "language-tie",
+    "version": "0.8.0",
     "description": "Atom language support for TIE",
-    "repository": {
-    	"type": "git",
-    	"url": "https://github.com/ytbmulder/language-tie.git"
+    "keywords": [
+    ],
+    "activationCommands": {
+        "atom-workspace": "language-tie:toggle"
     },
-    "bugs": {
-		"url": "https://github.com/ytbmulder/language-tie/issues"
-	},
+    "repository": "https://github.com/YTBMulder/language-tie",
+    "license": "MIT",
     "engines": {
-        "atom": "*",
-        "node": "*"
+        "atom": ">=1.0.0 <2.0.0"
+    },
+    "dependencies": {
     }
 }
