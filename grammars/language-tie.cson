@@ -1,5 +1,8 @@
 scopeName: 'source.tie'
-fileTypes: [ 'tie' ]
+fileTypes: [
+    'tie'
+    'tppout'
+]
 name: 'TIE'
 
 patterns: [
@@ -13,17 +16,17 @@ patterns: [
         include: '#strings'
     }
     {
-        comment: 'Highlighting of storage types'
+        # Highlighting of storage types.
         match: '\\b(assign|coprocessor|cstub_swap|ctype|def|field|length|lookup|iclass|imap|immediate_range|import_wire|in|inout|instruction_group|interface|format|function|opcode|operand|operand_map|operation|operator|out|property|proto|queue|reference|regbypass|regfile|regport|schedule|semantic|shared|slot|slot_opcodes|state|table|TIEprint|use|user_register|wire|xfer_proto)\\b'
         name: 'storage.type.tie'
     }
     {
-        comment: 'Highlighting of numeric types'
+        # Highlighting of numeric types.
         match: "\\b((([1-9]*)'b(0|1)*)|(([1-9]*)'d[0-9]*)|(?i)(([1-9]\\d*)'h[0-9a-f]*)|(([1-9]*)'o[0-7]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(?i)(l|ul|u|f|ll|ull)?\\b"
         name: 'constant.numeric.tie'
     }
     {
-        comment: 'Highlighting of embedded PERL code'
+        # Highlighting of embedded PERL code starting with ;.
         begin: '^;'
         end: '$'
         name: 'meta.embedded.perl'
@@ -32,6 +35,18 @@ patterns: [
                 include: 'source.perl'
             }
         ]
+    }
+    {
+        # Highlighting of PERL variables between `` symbols in TIE.
+        begin: '`'
+        beginCaptures:
+            0:
+                name: 'variable.language.begin.tie'
+        end: '`'
+        endCaptures:
+            0:
+                name: 'variable.language.end.tie'
+        name: 'variable.language.tie'
     }
 ]
 

@@ -1,0 +1,23 @@
+// Style for a custom background color for embedded PERL.
+atom-text-editor::shadow {
+    .line {
+        position: relative;
+
+        .embedded {
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                content: '';
+                display: block;
+                z-index: -1;
+            }
+
+            &.perl::before {
+                background-color: hsl(180, 90%, 15%);
+            }
+        }
+    }
+}
