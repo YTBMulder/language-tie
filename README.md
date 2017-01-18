@@ -16,5 +16,7 @@ Version history:
 1.1.0 - Added support for highlighting inline PERL variables and *.tppout input files. Embedded PERL background colour style now loads automatically when Atom starts.
 
 TODO's:
-- Clean up the code
-- Add banners for 'build passing', 'no dependencies' etc.
+- Clean up the code  
+- Add banners for 'build passing', 'no dependencies' etc.  
+- Add highlighting for # comments in *.tppout file.  
+- Settings for styles.less such as PERL background color. See: https://discuss.atom.io/t/update-styles-less-upon-package-installation/35628/4
